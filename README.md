@@ -9,6 +9,7 @@
 This code is part of Ansible series on euro-linux.com. (Lang PL). It's not intended to be production used.
 
 Exercises for readers:
-[ ] Change Nginx config so default server will return our app.
-[ ] Change application SECRET_KEY (in future we will encrypt it with ansible-vault)
-[ ] Add firewalld support, start service if not started, and open http/https ports (ssh might be also useful ;)).
+
+- [ ] Change Nginx config so default server will return our app.
+- [ ] Change application SECRET_KEY (in future we will encrypt it with ansible-vault)
+- [ ] Add firewalld support, start service if not started, and open http/https ports (ssh might be also useful ;)).
