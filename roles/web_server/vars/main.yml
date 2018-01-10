@@ -1,0 +1,7 @@
+---
+domain: helloworld.local
+virtenv_dir: /var/app/hello_virt_env
+app_dir: /var/app/hello
+uwsgi_ini_name:  hello_uwsgi.ini
+app_name: hello
+git_repo: https://github.com/EuroLinux/hello_world_django2.git

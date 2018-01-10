@@ -1,0 +1,54 @@
+---
+- name: Mkdir for app
+  file:
+    path: "{{app_dir}}"
+    state: directory
+    recurse: yes
+
+- name: Clone hello world app
+  git:
+    repo: "{{ git_repo }}"
+    dest: "{{ app_dir }}"
+    version: master
+    accept_hostkey: yes
+    force: yes
+  notify: "restart web services"
+
+- name: Make virtual env
+  pip:
+     virtualenv: "{{ virtenv_dir }}"
+     virtualenv_command: virtualenv-3
+     virtualenv_python: python3.4
+     requirements: "{{ app_dir }}/requirements.txt"
+
+- name: Django makemigrations
+  django_manage:
+    app_path: "{{ app_dir }}"
+    command: makemigrations
+    virtualenv: "{{ virtenv_dir }}"
+
+- name: Django migrate
+  django_manage:
+    app_path: "{{ app_dir }}"
+    command: migrate
+    virtualenv: "{{ virtenv_dir }}"
+# TODO FIXME Static files?
+#- name: Django collect static
+#  django_manage:
+#    app_path: "{{ app_dir }}"
+#    command: collectstatic
+#    virtualenv: "{{ virtenv_dir }}"
+
+- name: Disable Django debug
+  lineinfile:
+    path: "{{app_dir}}/{{app_name}}/settings.py"
+    regexp: "^DEBUG"
+    line: "DEBUG = False"
+
+- name: Django ALLOW Hosts to *
+  lineinfile:
+    path: "{{app_dir}}/{{app_name}}/settings.py"
+    regexp: "^ALLOWED_HOSTS"
+    line: "ALLOWED_HOSTS = [\'*\']"
+
+

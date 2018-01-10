@@ -1,0 +1,25 @@
+---
+- name: Install EPEL
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+
+- name: Update Packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Install Python 3.4 and virtualenv and git
+  yum: state=present name={{ item }}
+  with_items:
+    - python34
+    - python34-devel
+    - python34-virtualenv
+    - python34-pip
+    - git
+    - '@development'
+
+- name: Install nginx
+  yum:
+    state: present
+    name: nginx

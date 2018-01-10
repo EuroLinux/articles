@@ -1,0 +1,27 @@
+---
+- name: Enable and restart nginx
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes
+  listen: "restart web services"
+
+- name: Enable and restart uwsgi
+  service:
+    name: uwsgi
+    state: restarted
+    enabled: yes
+  listen: "restart web services"
+
+
+- name: Touch uwsgi (restart vassal).
+  file:
+    path: "{{app_dir}}/{{uwsgi_ini_name}}"
+    state: touch
+  listen: "restart vassals"
+
+- name: reboot
+  shell: sleep 5 && shutdown -r now "Host restart triggered"
+  async: 1
+  poll: 0
+  ignore_errors: true

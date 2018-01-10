@@ -1,0 +1,6 @@
+# Vagrant dir
+.vagrant
+# EL repo.sh
+repo.sh
+# Ansible retry
+*.retry

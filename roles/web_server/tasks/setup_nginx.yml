@@ -1,0 +1,14 @@
+---
+- name: Copy nginx conf
+  copy:
+    src: files/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: "restart web services"
+
+- name: Copy nginx template
+  template:
+    src:  templates/nginx_my_site.j2
+    dest: /etc/nginx/conf.d/my_site_nginx.conf
+  notify: "restart web services"
+
+

@@ -1,0 +1,6 @@
+---
+- hosts: apps
+  user: ansible
+  become: true
+  roles:
+    - web_server

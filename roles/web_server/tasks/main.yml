@@ -1,0 +1,7 @@
+---
+- import_tasks: setup_yum.yml
+- import_tasks: setup_app.yml
+- import_tasks: setup_fixes.yml
+- import_tasks: setup_uwsgi.yml
+- import_tasks: setup_nginx.yml
+

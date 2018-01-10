@@ -1,0 +1,12 @@
+[Unit]
+Description=uWSGI Emperor service
+
+[Service]
+ExecStart=/usr/bin/uwsgi --emperor /etc/uwsgi/vassals --uid nginx --gid nginx
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

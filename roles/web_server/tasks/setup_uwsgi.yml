@@ -1,0 +1,31 @@
+---
+- name: Copy uwsgi template
+  template:
+    src:  templates/uwsgi.j2
+    dest: "{{app_dir}}/{{uwsgi_ini_name}}"
+
+- name: Setup uWSGI vasslas dir
+  file:
+    path: /etc/uwsgi/vassals
+    state: directory
+    recurse: yes
+
+- name: Setup uWSGI vassals softlink
+  file:
+    src: "{{app_dir}}/{{uwsgi_ini_name}}"
+    dest: "/etc/uwsgi/vassals/{{uwsgi_ini_name}}"
+    state: link
+
+- name: Install uwsgi pip
+  pip:
+    name: uwsgi
+    executable: pip3.4
+
+- name: Copy uwsgi service
+  copy:
+    src: files/uwsgi.service
+    dest: /etc/systemd/system/uwsgi.service
+  notify: "restart web services"
+
+
+

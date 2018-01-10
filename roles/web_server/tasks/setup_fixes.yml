@@ -1,0 +1,13 @@
+---
+- name: Put SELinux in permissive
+  selinux:
+    policy: targeted
+    state: permissive
+
+- name: Make nginx "{{ app_dir }}" owner
+  file:
+    path: "{{ app_dir }}"
+    owner: nginx
+    group: nginx
+    recurse: yes
+  notify: "restart web services"
