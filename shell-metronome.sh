@@ -1,4 +1,8 @@
 #!/bin/bash
+# Author: Alex Baranowski
+# License: MIT
+
+
 REQUIRED_COMMANDS='aplay'
 TEMPO=120
 METRE=4
